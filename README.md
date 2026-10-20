@@ -1,10 +1,9 @@
 <h1>ShieldPy — Heuristic Malware Detection System</h1>
 
-დესკტოპ-აპლიკაცია, რომელიც ჰევრისტიკული ანალიზის გამოყენებით ფაილებსა და დირექტორიებში პოტენციურად მავნე ქცევას ამოწმებს და აღჭურვილია როლებზე დაფუძნებული წვდომის კონტროლის სისტემითა და ანალიტიკური დაფით.
+A desktop application that uses heuristic analysis to check files and directories for potentially malicious behavior, equipped with a role-based access control system and an analytics dashboard.
 
 <h2> Features </h2>
-- Heuristic detection engine with 20 rules (entropy analysis, magic byte verification, double extension detection, keyword scanning, and
-more)<br>
+- Heuristic detection engine with 20 rules (entropy analysis, magic byte verification, double extension detection, keyword scanning, and more)<br>
 - Role-based access control (admin / user)<br>
 - Scan history and audit logging<br>
 - Analytics dashboard with charts<br>
@@ -13,12 +12,12 @@ more)<br>
 
 <h2> Roles </h2>
 
-<b>Admin</b>— სრული წვდომა: შეუძლია ყველა მომხმარებლის სკანირების ისტორიისა და ლოგების ნახვა, ფაილების აღდგენა ან სამუდამოდ წაშლა კარანტინიდან და სისტემის მასშტაბით ანალიტიკის ნახვა.
+<b>Admin</b> — Full access: Can view scan history and logs of all users, restore or permanently delete files from quarantine, and view system-wide analytics.
 
-<b>User</b> — შეზღუდული წვდომა: შეუძლიათ ფაილების სკანირება, საკუთარი სკანირების ისტორიისა და ჟურნალების ნახვა და საკუთარი ანალიტიკის ნახვა. არ აქვთ სხვა მომხმარებლების მონაცემებზე წვდომა ან კარანტინში მოთავსებული ფაილების მართვის უფლება.
+<b>User</b> — Restricted access: Can scan files, view their own scan history and logs, and view their own analytics. They do not have access to other users' data or the ability to manage quarantined files.
 
-> პირველი რეგისტრირებული ანგარიში ავტომატურად ხდება ადმინისტრატორი. ყველა შემდგომ ანგარიშს ენიჭება მომხმარებლის როლი. ნაგულისხმევი ადმინისტრატორის ანგარიში მოცემულია `admin.py`.
-> Admin ინფო: username `admin` / password `Admin@123456`
+> The first registered account automatically becomes the administrator. All subsequent accounts are assigned the user role. The default administrator account details are provided in `admin.py`.
+> Admin info: username `admin` / password `Admin@123456`
 
 <h2> Tech Stack </h2>
 Python, PyQt5, SQLite, matplotlib, bcrypt, python-magic
@@ -34,29 +33,23 @@ pip install python-magic-bin
 pip install matplotlib
 ```
 
-<h2> How to Run </h2>
-
-<b>Step 1 </b>- მონაცემთა ბაზის ინიციალიზაცია (გაუშვით მხოლოდ ერთხელ):
+<h2> Step 1 — Database initialization (run only once): </h2>
 
 ```bash
 python database.py
 ```
-
-<b>Step 2 </b>— შექმენით ადმინისტრატორის ანგარიში (გაუშვით მხოლოდ ერთხელ):
+<h2>Step 2 — Create the administrator account (run only once):</h2>
 
 ```bash
 python admin.py
 ```
-
-<b>Step 3 </b> — გაუშვით აპლიკაცია:
+<h2>Step 3 — Run the application:</h2>
 
 ```bash
 python main.py
 ```
 
- <h2>Project Structure</h2>
-
-```
+```bash
 ShieldPy/
 ├── main.py                 # Entry point — launches the application
 ├── admin.py                # Seeds the default admin account (run once)
@@ -71,6 +64,6 @@ ShieldPy/
 ├── database.py             # Initializes SQLite schema and tables
 ├── logs.py                 # Audit logger — records all security events
 ├── hash_checker.py         # SHA-256 file hashing 
-└── antivirus.db            # SQLite database (auto-created on first run)
-└──  README.md
+├── antivirus.db            # SQLite database (auto-created on first run)
+└── README.md
 ```
