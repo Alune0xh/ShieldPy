@@ -1,0 +1,2 @@
+# Rename this file to mydata.py and enter your actual Gmail app password
+EMAIL_PASSWORD = "your_app_password_here"
