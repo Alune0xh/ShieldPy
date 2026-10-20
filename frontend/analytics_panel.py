@@ -1,3 +1,4 @@
+
 import sys
 import numpy as np
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QApplication, QWidget
@@ -11,7 +12,7 @@ CARD_DARK = "#0f1729"
 BORDER_DARK = "#1e293b"
 TEXT_LIGHT = "#e2e8f0"
 TEXT_MUTED = "#64748b"
-ACCENT_CYAN = "#38bdf8"
+ACCENT_CYAN = "#38bdf9"
 
 
 class AnalyticsPanel(QFrame):
