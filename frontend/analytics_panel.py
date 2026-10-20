@@ -3,7 +3,7 @@ import numpy as np
 from PyQt5.QtWidgets import QFrame, QVBoxLayout, QHBoxLayout, QLabel, QApplication, QWidget
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from analytics import get_scan_stats, get_summary_counts
+from backend.analytics import get_scan_stats, get_summary_counts
 
 
 BG_DARK = "#0a0e1a"

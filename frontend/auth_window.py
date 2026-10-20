@@ -1,6 +1,6 @@
-import database
+import backend.database as database
 import os
-from login import LoginManager
+from backend.login import LoginManager
 
 from PyQt5.QtWidgets import (
     QWidget, QStackedWidget, QVBoxLayout, QHBoxLayout,
@@ -11,7 +11,7 @@ from PyQt5.QtGui import QPixmap, QPainter, QColor, QIcon
 from PyQt5.QtCore import Qt, QEvent
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BG_PATH = os.path.join(BASE_DIR, "mesame.jpg")
+BG_PATH = os.path.join(BASE_DIR, "mesame.jpg").replace("\\", "/")
 
 from PyQt5.QtGui import QPixmap, QPainter, QColor, QIcon, QPen
 from PyQt5.QtCore import Qt, QEvent, QPropertyAnimation
@@ -62,7 +62,8 @@ class AuthWindow(QWidget):
     def init_ui(self):
         self.setWindowTitle("ShieldPy security gateway")
         self.setGeometry(100, 100, 900, 650)
-        self.setWindowIcon(QIcon("login.png"))
+        icon_path = os.path.join(BASE_DIR, "login.png").replace("\\", "/")
+        self.setWindowIcon(QIcon(icon_path))
 
         outer_layout = QHBoxLayout()
         outer_layout.setAlignment(Qt.AlignCenter)

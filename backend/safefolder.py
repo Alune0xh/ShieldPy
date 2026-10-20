@@ -1,7 +1,7 @@
 import os
 import shutil
 import sqlite3
-from logs import AuditLogger
+from .logs import AuditLogger
 
 class QuarantineManager:
     def __init__(self, db_path, vault_dir="safe_folder_for_viruses"):

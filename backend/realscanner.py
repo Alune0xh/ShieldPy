@@ -1,8 +1,8 @@
 import os
 import sqlite3
-from rules_for_detection import RulesForViruses
-from hash_checker import HashChecker
-from logs import AuditLogger
+from .rules_for_detection import RulesForViruses
+from .hash_checker import HashChecker
+from .logs import AuditLogger
 
 
 class FileScanner:

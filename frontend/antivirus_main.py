@@ -8,19 +8,19 @@ from PyQt5.QtWidgets import (
 
 )
 from PyQt5.QtCore import Qt 
-from analytics_panel import AnalyticsPanel
+from frontend.analytics_panel import AnalyticsPanel
 from PyQt5.QtGui import  QIcon
 
 
 class AntivirusDashboard(QWidget): 
     def __init__(self):
         super().__init__()
-        import database
+        import backend.database as database
         database.initialize_db() 
 
-        from login import LoginManager
-        from realscanner import FileScanner
-        from safefolder import QuarantineManager
+        from backend.login import LoginManager
+        from backend.realscanner import FileScanner
+        from backend.safefolder import QuarantineManager
 
 
         self.login_manager = LoginManager(database.DB_PATH)
@@ -38,7 +38,9 @@ class AntivirusDashboard(QWidget):
         self.setWindowTitle("ShieldPy Antivirus Engine v1.0") 
         self.setGeometry(100, 100, 900, 600) 
         self.setStyleSheet("background-color: #0d1117;") 
-        self.setWindowIcon(QIcon("N3.png")) 
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        icon_path = os.path.join(BASE_DIR, "N3.png").replace("\\", "/")
+        self.setWindowIcon(QIcon(icon_path)) 
 
         main_layout = QHBoxLayout() 
         main_layout.setContentsMargins(0, 0, 0, 0) 
@@ -389,7 +391,7 @@ class AntivirusDashboard(QWidget):
             self.stack.setCurrentIndex(pages[name]) 
             self.load_logs() 
         elif name == "Analytics": 
-            import database 
+            import backend.database as database
             old_page = self.page_analytics 
             self.page_analytics = AnalyticsPanel(database.DB_PATH, self.user_id, self.user_role)
             self.stack.removeWidget(old_page) 
@@ -410,7 +412,7 @@ class AntivirusDashboard(QWidget):
     #ლოგების ჩატვირთვა - admin ყველას ხედავს, user მხოლოდ საკუთარს
     def load_logs(self):
         try:
-           import database, sqlite3
+           import backend.database as database, sqlite3
            from PyQt5.QtGui import QColor
            self.logs_table.setRowCount(0) 
 
@@ -517,7 +519,7 @@ class AntivirusDashboard(QWidget):
 
     def load_analytics(self):
         try:
-            import database, sqlite3
+            import backend.database as database, sqlite3
             with sqlite3.connect(database.DB_PATH) as conn:
                 total = conn.execute("SELECT COUNT(*) FROM scanned_files").fetchone()[0]
                 threats = conn.execute(
@@ -547,8 +549,8 @@ class AntivirusDashboard(QWidget):
         self.log_console.append(f"🔎 Starting scan on: {target}") 
 
         try: 
-            import database
-            from realscanner import FileScanner
+            import backend.database as database
+            from backend.realscanner import FileScanner
 
             if self.scanner is None: 
                 self.scanner = FileScanner(database.DB_PATH) 
@@ -566,7 +568,7 @@ class AntivirusDashboard(QWidget):
                 
                 if score >= 70:
                    filename = os.path.basename(target)
-                   from hash_checker import HashChecker
+                   from backend.hash_checker import HashChecker
                    file_hash = HashChecker().new_hash(target)
                    self.log_console.append(f"[🚨] HIGH RISK DETECTED! Isolating '{filename}' to Quarantine...")
                    try:
@@ -685,7 +687,7 @@ class AntivirusDashboard(QWidget):
            self.scan_title.setText(f"Welcome back, {self.username} 👋") 
            
         try:
-           import database, sqlite3
+           import backend.database as database, sqlite3
            self.quarantine_table.setRowCount(0)
            with sqlite3.connect(database.DB_PATH) as conn: 
             if self.user_role == "admin" or self.user_role is None:             
@@ -712,9 +714,9 @@ class AntivirusDashboard(QWidget):
           print(f"Quarantine load error: {e}")
 
     def handle_logout(self):
-      from auth_window import AuthWindow
-      from logs import AuditLogger
-      import database
+      from .auth_window import AuthWindow
+      from backend.logs import AuditLogger
+      import backend.database as database
       AuditLogger(database.DB_PATH).log_event(self.user_id, "logged out", f"Session ended")
     
       self.user_id = None

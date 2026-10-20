@@ -4,8 +4,8 @@ import random
 import smtplib
 from email.message import EmailMessage
 import bcrypt
-from mydata import EMAIL_PASSWORD
-from logs import AuditLogger
+from .mydata import EMAIL_PASSWORD, SENDER_EMAIL
+from .logs import AuditLogger
 
 class LoginManager:
     def __init__(self, db_path):
@@ -21,7 +21,7 @@ class LoginManager:
         return True, None
 
     def send_verification_email(self, to_email, code): 
-        sender_email = 'pysecurity.n0reply@gmail.com'   
+        sender_email = SENDER_EMAIL  
         sender_password = EMAIL_PASSWORD
         smtp_server = 'smtp.gmail.com'
 
