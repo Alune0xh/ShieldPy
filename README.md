@@ -1,6 +1,6 @@
 <h1>ShieldPy — Heuristic Malware Detection System</h1>
 
-A desktop application that uses heuristic analysis to check files and directories for potentially malicious behavior, equipped with a role-based access control system and an analytics dashboard.
+A desktop application that uses heuristic analysis to check files and directories for potentially malicious behavior, equipped with a role-based access control system and and analytics dashboard.
 
 <h2> Features </h2>
 - Heuristic detection engine with 20 rules (entropy analysis, magic byte verification, double extension detection, keyword scanning, and more)<br>
